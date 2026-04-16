@@ -14,7 +14,7 @@ type Slide = {
   feedback?: string;
 };
 
-const STORAGE_KEY = "valon-presentation-takehome-v1";
+const STORAGE_KEY = "valon-presentation-takehome-v2";
 
 function makeSlide(index: number): Slide {
   return {
@@ -22,10 +22,10 @@ function makeSlide(index: number): Slide {
     name: `Page ${index + 1}`,
     prompt:
       index === 0
-        ? "A bright opening slide image for a mortgage startup deck, cinematic lighting, editorial style"
+        ? "An opening slide for a mortgage startup presentation with a bold hero image, a giant title, and extremely eager sales vibes"
         : "",
     status: "idle",
-    note: index === 0 ? "Try making this feel weirdly premium." : ""
+    note: index === 0 ? "House style is locked. Please do not make it tasteful." : ""
   };
 }
 
@@ -36,7 +36,7 @@ function starterSlides(): Slide[] {
 export default function Home() {
   const [slides, setSlides] = useState<Slide[]>(starterSlides);
   const [selectedId, setSelectedId] = useState<string>("");
-  const [message, setMessage] = useState("Local only. Nothing saves anywhere real.");
+  const [message, setMessage] = useState("Local only. This does not sync anywhere.");
   const [exporting, setExporting] = useState(false);
 
   useEffect(() => {
@@ -209,7 +209,7 @@ export default function Home() {
       <aside className="sidebar">
         <div className="sidebar-top">
           <p className="eyebrow">Valon Presentation Takehome</p>
-          <h1>Deck thing</h1>
+          <h1>Slides but worse</h1>
           <button className="loud-button" onClick={addSlide} type="button">
             Box +
           </button>
@@ -258,6 +258,9 @@ export default function Home() {
           <div className="top-actions">
             <button className="ghost-button" onClick={() => selectedSlide && killSlide(selectedSlide.id)} type="button">
               toss
+            </button>
+            <button className="ghost-button weird-button" onClick={addSlide} type="button">
+              another one
             </button>
             <button className="ghost-button" disabled={exporting} onClick={exportDeck} type="button">
               {exporting ? "packing..." : "PPT-ish"}
